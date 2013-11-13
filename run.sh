@@ -12,7 +12,7 @@ else
 
 
     # run klee without optimization flag
-    klee-original --libc=uclibc ${PROGRAM}.bc
+    klee-original --optimize --libc=uclibc ${PROGRAM}.bc
     klee-stats --print-all klee-last
     # run all generated test cases
     TEST=$(find ./klee-last/ -name *.ktest)
