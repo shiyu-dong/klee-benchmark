@@ -21,7 +21,6 @@ int main(){
 
    int n;
    klee_make_symbolic(&n, sizeof(n), "n");
-   klee_assume(n < 2000);
 
    
    if (n <= 0 || n >= 1024){
@@ -30,9 +29,13 @@ int main(){
       a = (int *) malloc( n * sizeof(int));
    }
 
-   //ASSUME(a);
+   if (a)
+     test(&n);
 
-   test(&n);
+   // ASSUME(a);
+
+   // test(&n);
+
 
    return 1;
 }
