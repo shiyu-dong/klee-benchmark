@@ -1,41 +1,40 @@
-#include <stdlib.h>
 int * a;
+int n;
 
-
-int test(int * n ){
+int test(){
 
    int i;
 
-   for (i = 0; i < (*n); ++i){
+   for (i = 0; i < n; ++i){
 
+      if (a[i])
+         n--;
+      
       a[i] = 0;
       
       
    }
 
-   return 1;
+   return 0;
 }
 
 
 int main(){
 
-   int n;
    klee_make_symbolic(&n, sizeof(n), "n");
-
+   //n = __NONDET__();
    
    if (n <= 0 || n >= 1024){
-      exit(1);
+      n=5;
+      a = (int *) malloc(n * sizeof(int));
    } else {
       a = (int *) malloc( n * sizeof(int));
    }
 
-   if (a)
-     test(&n);
+   //ASSUME(a);
 
-   // ASSUME(a);
 
-   // test(&n);
-
+   test();
 
    return 1;
 }
