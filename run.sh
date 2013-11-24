@@ -10,9 +10,13 @@ else
     # compile program with gcov profiling
     gcc -L ../../Release+Asserts/lib ${PROGRAM}.c -lkleeRuntest -fprofile-arcs -ftest-coverage -o ${PROGRAM}
 
-
     # run klee without optimization flag
-    klee-original --optimize --libc=uclibc ${PROGRAM}.bc
+    if [ "$1" == "--print" ]
+    then
+      klee-original --print-before-all --libc=uclibc ${PROGRAM}.bc
+    else
+      klee-original --libc=uclibc ${PROGRAM}.bc
+    fi
     klee-stats --print-all klee-last
     # run all generated test cases
     TEST=$(find ./klee-last/ -name *.ktest)
