@@ -4,7 +4,7 @@ then
   rm -rf klee-* *.gcno *.gcda *.gcov ex? ex??
 else
   make
-  for PROGRAM in test
+  for PROGRAM in ex2 ex3 ex8 ex9 ex20 ex30 ex34
   do
     echo ${PROGRAM}
     # compile program with gcov profiling
@@ -27,7 +27,7 @@ else
     done
     gcov -b -c ${PROGRAM}
 
-    # run klee with optimization flag
+    # run klee with original optimization
     if [ "$1" == "--print" ]
     then
       klee-original --optimize --print-after-all --libc=uclibc ${PROGRAM}.bc
