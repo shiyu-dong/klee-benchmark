@@ -1,11 +1,10 @@
 #!/bin/bash
-#PROGRAMS="csplit date expand factor fold join tr seq pr mknod"
-PROGRAMS="ex2 ex3 ex8 ex9 ex20 ex30 ex34"
+PROGRAMS="ex2 ex3 ex8 ex9 ex20 ex30 ex34 ex40"
 
 if [ "$1" == "--clean" ]
 then
   make clean
-  rm -rf klee-* *.gcno *.gcda *.gcov ex? ex?? test_result_new
+  rm -rf klee-* *.gcno *.gcda *.gcov ex? ex?? test_result_new csv
 else
   make
   if [ ! -d "test_result_new" ]; then
