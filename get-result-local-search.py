@@ -22,6 +22,7 @@ while True:
 
   opt = ""
   pathNum = 0
+  instr = ""
   time = ""
   query = ""
   line_coverage = ""
@@ -80,6 +81,7 @@ while True:
           break
         elif line.find("klee-last") != -1 and row == 3:
           info = line.split()
+          instr = info[3]
           time = info[5]
           query = info[27]
         else:
@@ -106,7 +108,7 @@ while True:
     line = fo.readline()
 
   if len(opt) > 0:
-    result.append([opt, time, query, line_coverage, branch_coverage, taken_at_least_once, calls_executed])
+    result.append([opt, instr, time, query, line_coverage, branch_coverage, taken_at_least_once, calls_executed])
 for i in result:
   #print i
   wr.writerow(i)
